@@ -1,0 +1,89 @@
+using namespace std;
+class stack
+{
+private:
+    int top, size;
+    int *a;
+    bool isfull();
+    void initialize(int);
+    void deconstruct();
+public:
+    stack(int);
+    stack(int,int);
+    stack();
+    ~stack();
+    bool isempty();
+    void push(int);
+    int pop();
+    void display();
+};
+void stack::push(int x)
+{
+    if(isfull())
+    {
+        cout<<"Stack overflow!!\n";
+        return;
+    }
+    top++;
+    a[top]=x;
+}
+int stack::pop()
+{
+    if(isempty())
+    {
+        cout<<"Stack underflow!!\n";
+        return -1;
+    }
+    int x=a[top];
+    top--;
+    return x;
+}
+stack::stack(int n)
+{
+    initialize(n);
+}
+stack::stack(int n,int x)
+{
+    initialize(n);
+    top++;
+    a[top]=x;
+}
+stack::stack()
+{
+    int n=10;
+    initialize(n);
+}
+stack::~stack()
+{
+    deconstruct();
+}
+void stack::display()
+{
+    if(isempty())
+    {
+        cout<<"Stack is empty\n";
+        return;
+    }
+    cout<<"Displaying stack from top to bottom:\n";
+    for(int i=top;i>=0;i--)
+        cout<<a[i]<<' ';
+    cout<<endl;
+}
+bool stack::isempty()
+{
+    return (top==-1);
+}
+bool stack::isfull()
+{
+    return (top==(size-1));
+}
+void stack::initialize(int n)
+{
+    a=new int[n];
+    top=-1;
+    size=n;
+}
+void stack::deconstruct()
+{
+    delete []a;
+}
